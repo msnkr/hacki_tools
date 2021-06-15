@@ -3,4 +3,4 @@ import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(('127.0.0.1', 5555))
 message = 'Hello World'
-sock.send(message)
+sock.send(message.encode())

@@ -3,7 +3,7 @@ from termcolor import colored
 
 def target_communication():
     message = target.recv(1024)
-    print(message)
+    print(message.decode())
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
