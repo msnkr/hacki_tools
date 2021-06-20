@@ -72,7 +72,7 @@ def target_communication():
             clear                               --> Clear The Screen
             cd *Directory Name*                 --> Changes Directory On Target System
             upload *file name*                  --> Upload File To The target Machine
-            dload *file name*                --> Download File From Target Machine
+            dload *file name*                   --> Download File From Target Machine
             keylog_start                        --> Start The Keylogger
             keylog_dump                         --> Print Keystrokes That The Target Inputted
             keylog_stop                         --> Stop And Self Destruct Keylogger File
