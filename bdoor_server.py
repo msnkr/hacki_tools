@@ -1,8 +1,9 @@
-import socket 
-from termcolor import colored
 import json
 import os
-import pyautogui
+import socket
+
+from termcolor import colored
+
 
 def receive():
     data = ''
