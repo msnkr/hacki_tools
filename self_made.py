@@ -1,14 +1,24 @@
-import paramiko
+import os
+import socket
 
-host = input('What is the ip?')
-port = '5555'
-command = 'whoami'
+# admo = 'runas.exe /savecred /user:administrator "%sysdrive%\testScripts\testscript1.ps1" '
+# dfir = 'netsh advfirewall set allprofiles state off'
 
-ssh = paramiko.SSHClient()
-ssh.load_system_host_keys()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-ssh.connect(host, port)
-stdin, stdout, stderr = ssh.exec_command(command)
-lines = stdout.readlines()
-print(lines)
+# os.system(admo)
+# os.system(dfir)
+
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+try:
+    host_ip = '192.168.1.131'
+    port = 80
+    print('Connected')
+except socket.gaierror as err:
+    print('There waws a problem')
+
+s.bind((host_ip, port))
+s.listen()
+
+host_ip, port = s.accept()
+print('Connection Successful')
