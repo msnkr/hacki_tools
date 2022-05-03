@@ -1,7 +1,17 @@
 import socket
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(('192.168.1.131', 4444))
+host = '127.0.0.1'
+port = 4444
 
-print('Listening')
-sock.listen(5)
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((host, port))
+    s.listen()
+
+    conn, addr = s.accept()
+    with conn:
+        print(f'Connected with {addr}')
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+        conn.sendall(data)
